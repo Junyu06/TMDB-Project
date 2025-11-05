@@ -4,7 +4,7 @@
 //
 //  Created by Junyu Li on 11/4/25.
 //
-
+//  Use ContentView as the main screen
 import SwiftUI
 import SwiftData
 
@@ -13,30 +13,21 @@ struct ContentView: View {
     @Query private var items: [Item]
 
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        TabView {
+            HomeView()
+                .tabItem {
+                    Label("Home", systemImage: "house")
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            
+            FavoritesView()
+                .tabItem {
+                    Label("Favorites", systemImage: "heart")
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
                 }
-            }
-        } detail: {
-            Text("Select an item")
-        }
+        }//start with the tab bar
     }
 
     private func addItem() {

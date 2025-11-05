@@ -45,6 +45,11 @@
 			path = TMDB_ProjectUITests;
 			sourceTree = "<group>";
 		};
+		D2E3092B2EBAA46E00CC723D /* Configs */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Configs;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +80,7 @@
 		D2E308DC2EBA9A7000CC723D = {
 			isa = PBXGroup;
 			children = (
+				D2E3092B2EBAA46E00CC723D /* Configs */,
 				D2E308E72EBA9A7000CC723D /* TMDB_Project */,
 				D2E308F72EBA9A7200CC723D /* TMDB_ProjectTests */,
 				D2E309012EBA9A7200CC723D /* TMDB_ProjectUITests */,
@@ -109,6 +115,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				D2E308E72EBA9A7000CC723D /* TMDB_Project */,
+				D2E3092B2EBAA46E00CC723D /* Configs */,
 			);
 			name = TMDB_Project;
 			packageProductDependencies = (
@@ -271,6 +278,8 @@
 /* Begin XCBuildConfiguration section */
 		D2E309062EBA9A7200CC723D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -335,6 +344,8 @@
 		};
 		D2E309072EBA9A7200CC723D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -392,6 +403,8 @@
 		};
 		D2E309092EBA9A7200CC723D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -400,6 +413,7 @@
 				DEVELOPMENT_TEAM = JAY4B9B628;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TMDB-Project-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +438,8 @@
 		};
 		D2E3090A2EBA9A7200CC723D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -432,6 +448,7 @@
 				DEVELOPMENT_TEAM = JAY4B9B628;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "TMDB-Project-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -456,6 +473,8 @@
 		};
 		D2E3090C2EBA9A7200CC723D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -478,6 +497,8 @@
 		};
 		D2E3090D2EBA9A7200CC723D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -500,6 +521,8 @@
 		};
 		D2E3090F2EBA9A7200CC723D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -520,6 +543,8 @@
 		};
 		D2E309102EBA9A7200CC723D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = D2E3092B2EBAA46E00CC723D /* Configs */;
+			baseConfigurationReferenceRelativePath = TMDBConfig.xcconfig;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
