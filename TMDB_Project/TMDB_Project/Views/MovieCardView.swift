@@ -13,42 +13,46 @@ struct MovieCardView: View {
     let onFavoriteToggle: () -> Void
     
     var body: some View {
-        VStack (alignment: .leading, spacing: 4){
-            ZStack(alignment: .topTrailing) {
-                AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "" )")!){
-                    img in img.resizable().scaledToFill()
-                } placeholder: {
-                    Color.gray.opacity(0.2)
-                }
-                .frame(width: 150, height: 220)
-                .cornerRadius(10)
-                .shadow(color: .black, radius: 5)
-                
-                Button(action: onFavoriteToggle) {
-                    HStack {
+        NavigationLink(destination: MovieDetailView(movieId: movie.id)) {
+            VStack(alignment: .leading, spacing: 4) {
+                ZStack(alignment: .topTrailing) {
+                    AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath ?? "")")!) { img in
+                        img.resizable().scaledToFill()
+                    } placeholder: {
+                        Color.gray.opacity(0.2)
+                    }
+                    .frame(width: 150, height: 210)
+                    .cornerRadius(10)
+                    .shadow(color: .black.opacity(0.3), radius: 4, x: 0, y: 2)
+                    .clipped()
+
+                    Button(action: onFavoriteToggle) {
                         Image(systemName: isFavorite ? "heart.fill" : "heart")
-                            .foregroundStyle(isFavorite ? .red: .white)
-                            .padding(8)
+                            .foregroundStyle(isFavorite ? .red : .white)
+                            .padding(6)
                             .background(Color.black.opacity(0.3))
                             .clipShape(Circle())
                             .padding(4)
                     }
                 }
-            }
-            VStack(alignment: .leading, spacing: 0){
-                Text(movie.title)
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .lineLimit(1)
-                HStack {
-                    Image(systemName: "star.fill")
-                        .foregroundColor(.yellow)
-                    Text("\(movie.voteAverage!, specifier: "%.1f")")
+                VStack(alignment: .leading, spacing: 0) {
+                    Text(movie.title)
+                        .font(.headline)
                         .foregroundColor(.black)
+                        .lineLimit(1)
+                    HStack {
+                        Image(systemName: "star.fill")
+                            .foregroundColor(.yellow)
+                        Text("\(movie.voteAverage ?? 0, specifier: "%.1f")")
+                            .foregroundColor(.black)
+                    }
                 }
             }
+            .padding(.top, 0)
+            .frame(width: 160, height: 240)
         }
-        .frame(width: 160, height: 250)
+        .buttonStyle(PlainButtonStyle())
+        .contentShape(Rectangle())
     }
 }
 

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct MovieListView: View {
-    @StateObject private var viewModel = MovieListModel()
+    //@StateObject private var viewModel = MovieListModel()
+    @EnvironmentObject var listModel: MovieListModel
     @State private var selectedTimeWindow = "day"
     
     private let columns = [
@@ -27,16 +28,16 @@ struct MovieListView: View {
                 .padding([.horizontal, .top])
                 .onChange(of: selectedTimeWindow) { oldValue, newValue in
                     Task {
-                        await viewModel.fetchMovies(timeWindow: newValue)
+                        await listModel.fetchMovies(timeWindow: newValue)
                     }
                 }
                 LazyVGrid(columns: columns, spacing: 40) {
-                    ForEach(viewModel.movies) { movie in
+                    ForEach(listModel.movies) { movie in
                         MovieCardView(
                             movie: movie,
-                            isFavorite: viewModel.favorites.contains(movie.id)
+                            isFavorite: listModel.favorites.contains(movie.id)
                         ){
-                            viewModel.toggleFavorite(movie.id)
+                            listModel.toggleFavorite(movie.id)
                         }
                     }
                 }
@@ -44,7 +45,10 @@ struct MovieListView: View {
             }
             .navigationTitle("Trending Movies")
             .task {
-                await viewModel.fetchMovies(timeWindow: selectedTimeWindow)
+                await listModel.fetchMovies(timeWindow: selectedTimeWindow, forceRefresh: false)
+            }
+            .refreshable {
+                await listModel.fetchMovies(timeWindow: selectedTimeWindow, forceRefresh: true)
             }
         }
     }

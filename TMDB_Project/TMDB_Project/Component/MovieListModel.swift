@@ -16,9 +16,9 @@ class MovieListModel: ObservableObject {
     private let service = TMDBService()
     
     //get trending movie
-    func fetchMovies(timeWindow: String = "day") async {
+    func fetchMovies(timeWindow: String = "day", forceRefresh: Bool = false) async {
         do {
-            let fetched = try await service.fetchTrendingMovies(timeWindow: timeWindow)
+            let fetched = try await service.fetchTrendingMovies(timeWindow: timeWindow, forceRefresh: forceRefresh)
             self.movies = fetched
         } catch {
             print("Error fetching movies: \(error)")

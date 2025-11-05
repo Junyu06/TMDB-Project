@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct TMDB_ProjectApp: App {
+    @StateObject private var listModel = MovieListModel()
+    
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -26,6 +28,7 @@ struct TMDB_ProjectApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(listModel)// make it share for all code
         }
         .modelContainer(sharedModelContainer)
     }

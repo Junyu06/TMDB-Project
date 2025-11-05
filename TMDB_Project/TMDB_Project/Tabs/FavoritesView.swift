@@ -8,17 +8,15 @@
 import SwiftUI
 
 struct FavoritesView: View {
+    @EnvironmentObject var listModel: MovieListModel
+
     var body: some View {
-        NavigationStack {
-            VStack {
-                //todo
-            }
-            .navigationTitle("TMDB Moview")
-            .navigationBarTitleDisplayMode(.automatic)
+        NavigationView {
         }
     }
 }
 
 #Preview {
     FavoritesView()
+        .environmentObject(MovieListModel())
 }
