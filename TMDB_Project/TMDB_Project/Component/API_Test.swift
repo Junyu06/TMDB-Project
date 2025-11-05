@@ -4,6 +4,7 @@
 //
 //  Created by Junyu Li on 11/4/25.
 //
+// This is an tester for testing is xcconfig loaded to the environment or not
 
 import SwiftUI
 

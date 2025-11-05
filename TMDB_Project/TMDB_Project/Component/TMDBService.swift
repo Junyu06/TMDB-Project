@@ -4,6 +4,7 @@
 //
 //  Created by Junyu Li on 11/4/25.
 //
+// This code handles the API connecton
 
 import Foundation
 
@@ -32,15 +33,17 @@ struct MovieDetail: Codable, Sendable {
     let title: String
     let overview: String
     let backdropPath: String?
+    let posterPath: String?
     let genres: [Genre]
     let releaseDate: String?
     let adult: Bool
     let runtime: Int?
     let productionCompanies: [ProductionCompany]
-    
+
     enum CodingKeys: String, CodingKey {
         case id, title, overview, genres, adult, runtime
         case backdropPath = "backdrop_path"
+        case posterPath = "poster_path"
         case releaseDate = "release_date"
         case productionCompanies = "production_companies"
     }
@@ -60,6 +63,17 @@ struct Genre: Codable, Identifiable, Sendable {
     let name: String
 }
 
+struct FavoriteMovie: Codable, Identifiable, Sendable, Hashable {
+    let id: Int
+    let title: String
+    let posterPath: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, title
+        case posterPath = "poster_path"
+    }
+}
+
 //use actor to prevent locking issues
 class TMDBService {
     private let apiKey = Bundle.main.object(forInfoDictionaryKey: "TMDB_API_KEY") as? String ?? ""
@@ -69,13 +83,20 @@ class TMDBService {
     static let shared = TMDBService()
     private var detailCache: [Int: MovieDetail] = [:]
     private var trendingCache: [String: [Movie]] = [:]
-    
+
+    //clear all caches
+    func clearCache() {
+        detailCache.removeAll()
+        trendingCache.removeAll()
+        print("[TMDBService] All caches cleared")
+    }
+
     //get the trending movies from the TMDB
     //return a movie structure
     func fetchTrendingMovies(timeWindow: String = "day", forceRefresh: Bool = false) async throws -> [Movie]{
         //if cached
         if !forceRefresh, let cached = trendingCache[timeWindow] {
-            print("[TMDService] Using cached trending list for \(timeWindow)")
+            print("[TMDBService] Using cached trending list for \(timeWindow)")
             return cached
         }
         
@@ -115,14 +136,16 @@ class TMDBService {
         return response.results
     }
     
+    //fech the movie detail from TMDB for single movie
     func fetchMovieDetail(id: Int, forceRefresh: Bool = false) async throws -> MovieDetail {
         //if cached
         if !forceRefresh, let cached = detailCache[id] {
-            print("[TMDService] Using cached for id: ", id)
+            print("[TMDBService] Using cached movie detail for id: \(id)")
             return cached
         }
-        
+
         //not yet cached
+        //print("[TMDBService] Fetching movie detail from API for id: \(id)")
         guard let url = URL(string: "\(baseURL)/movie/\(id)") else {
             throw URLError(.badURL)
         }
@@ -140,14 +163,10 @@ class TMDBService {
             "Authorization": "Bearer \(apiKey)"
         ]
         let (data, _) = try await URLSession.shared.data(for: request)
-        
-        //testing
-//        if let jsonString = String(data: data, encoding: .utf8) {
-//            print("[DEBUG] Raw JSON response for movie id \(id):")
-//            print(jsonString)
-//        }
+
         let detail = try JSONDecoder().decode(MovieDetail.self, from: data)
-        
+        print("[TMDBService] Movie detail decoded - id: \(detail.id), posterPath: \(detail.posterPath ?? "nil")")
+
         //cached and return
         detailCache[id] = detail
         return detail

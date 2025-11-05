@@ -4,6 +4,7 @@
 //
 //  Created by Junyu Li on 11/4/25.
 //
+// This file handles the UI of Home View which warped the MovieListVide
 
 import SwiftUI
 

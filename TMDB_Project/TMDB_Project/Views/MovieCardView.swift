@@ -4,6 +4,7 @@
 //
 //  Created by Junyu Li on 11/5/25.
 //
+// This code handles the UI for single movie and present as a card view
 
 import SwiftUI
 

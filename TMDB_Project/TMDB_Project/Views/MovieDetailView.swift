@@ -4,6 +4,7 @@
 //
 //  Created by Junyu Li on 11/5/25.
 //
+// This code handles the UI detail page of a movie
 
 import SwiftUI
 
@@ -14,7 +15,53 @@ struct MovieDetailView: View {
     
     var body: some View {
         ScrollView {
-            if let detail = viewMode.movieDetail {
+            if let errorMessage = viewMode.errorMessage {
+                // Error state
+                VStack(spacing: 16) {
+                    Image(systemName: "wifi.slash")
+                        .font(.system(size: 60))
+                        .foregroundColor(.secondary)
+                        .padding(.top, 100)
+
+                    Text("Internet Issues")
+                        .font(.title2)
+                        .fontWeight(.semibold)
+
+                    Text(errorMessage)
+                        .font(.body)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal)
+
+                    Button(action: {
+                        Task {
+                            await viewMode.fetchMoviesDetail(id: movieId, forceRefresh: true)
+                        }
+                    }) {
+                        HStack {
+                            Image(systemName: "arrow.clockwise")
+                            Text("Retry")
+                        }
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 24)
+                        .padding(.vertical, 12)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+            } else if viewMode.isLoading {
+                // Loading state
+                VStack(spacing: 16) {
+                    ProgressView()
+                        .scaleEffect(1.5)
+                        .padding(.top, 100)
+                    Text("Loading movie details...")
+                        .foregroundColor(.secondary)
+                }
+                .frame(maxWidth: .infinity)
+            } else if let detail = viewMode.movieDetail {
                 VStack(alignment: .leading, spacing: 4) {
                     ZStack(alignment: .topTrailing){
                         AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w780\(detail.backdropPath ?? "")")) { img in
@@ -30,10 +77,10 @@ struct MovieDetailView: View {
                         .cornerRadius(5)
                         
                         Button(action: {
-                            listModel.toggleFavorite(detail.id)
+                            listModel.toggleFavorite(detail.id, title: detail.title, posterPath: detail.posterPath)
                         }) {
-                            Image(systemName: listModel.favorites.contains(detail.id) ? "heart.fill" : "heart")
-                                .foregroundStyle(listModel.favorites.contains(detail.id) ? .red: .white)
+                            Image(systemName: listModel.isFavorite(detail.id) ? "heart.fill" : "heart")
+                                .foregroundStyle(listModel.isFavorite(detail.id) ? .red: .white)
                                 .padding(8)
                                 .background(Color.black.opacity(0.3))
                                 .clipShape(Circle())
