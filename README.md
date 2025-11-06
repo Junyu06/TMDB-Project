@@ -35,6 +35,8 @@ TMDB_Project/
 │   └── SettingsView.swift      # Settings tab
 ├── ContentView.swift            # Main tab view
 └── TMDB_ProjectApp.swift       # App entry point
+Configs/
+└── TMDBConfig.xcconfig       # API & URL Storage
 ```
 
 ## Setup
