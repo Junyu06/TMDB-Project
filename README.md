@@ -3,6 +3,8 @@
 A simple, clean SwiftUI app built for the Mobile App Developer assessment.
 A SwiftUI-based iOS application that fetches and displays trending movies from The Movie Database (TMDB) API, allowing users to browse movies, view detailed information, and manage their favorites.
 
+Github Page: `https://github.com/Junyu06/TMDB-Project/tree/main`
+
 ## Features
 
 - **Browse Trending Movies**: View daily or weekly trending movies from TMDB
