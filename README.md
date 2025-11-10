@@ -5,6 +5,8 @@ A SwiftUI-based iOS application that fetches and displays trending movies from T
 
 Github Page: `https://github.com/Junyu06/TMDB-Project`
 
+Presentation & Demo `https://youtu.be/s94Cd61AkVI`
+
 ## Features
 
 - **Browse Trending Movies**: View daily or weekly trending movies from TMDB
